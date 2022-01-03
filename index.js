@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 const app = express();
 
 const pageRouter = require("./routes/pageRoutes");
@@ -15,6 +16,8 @@ app.set("view engine", "ejs");
 //MiddleWare
 
 app.use(express.static("public"));
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //Routes
 app.use("/", pageRouter);
