@@ -28,7 +28,8 @@ exports.loginUser =  (req, res) => {
           bcrypt.compare(password, user.password, (err, same) => {
             if (same) {
               // USER SESSION
-             return  res.status(200).send('YOU ARE LOGGED IN');
+              req.session.userID = user._id;
+               res.status(200).redirect('/');
             }
             
           });
@@ -41,3 +42,8 @@ exports.loginUser =  (req, res) => {
       });
     }
   };
+  exports.logoutUser = (req, res) => {
+    req.session.destroy(()=> {
+      res.redirect('/');
+    })
+  }
