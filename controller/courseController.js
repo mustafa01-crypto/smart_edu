@@ -33,3 +33,20 @@ exports.getAllCourses = async (req,res)=> {
         })
     }
 }
+
+exports.getOneCourse = async (req,res)=> {
+
+    try{
+    const course = await Course.findOne({slug:req.params.slug})
+       res.render('course',{
+           course,
+           page_name:'courses'
+       })
+        
+    }catch(err){
+        res.status(400).json({
+            status: 'faill',
+            err
+        })
+    }
+}

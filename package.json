@@ -2,7 +2,8 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "mongoose": "^6.1.4"
+    "mongoose": "^6.1.4",
+    "slugify": "^1.6.5"
   },
   "scripts": {
     "start": "nodemon index.js"
