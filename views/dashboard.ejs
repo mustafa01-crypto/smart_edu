@@ -1,13 +1,16 @@
 <%- include('partials/_header'); %>
 	
 <%- include('partials/_navigation'); %>
+
+<% if(user.role ==='student') { %>
+
 	
 	<div class="all-title-box">
 		<div class="container text-center">
-			<h1><%= user.name %></h1>
+			<h1><%= user.name %> Student</h1>
 		</div>
 	</div>
-	
+
     <div id="pricing-box" class="section wb">
         <div class="container">
 			<div class="row">
@@ -279,6 +282,164 @@
     <script src="/js/all.js"></script>
     <!-- ALL PLUGINS -->
     <script src="/js/custom.js"></script>
+
+    <% } %>
+   
+	
+    
+
+    <% if(user.role ==='teacher') { %>
+
+	
+        <div class="all-title-box">
+            <div class="container text-center">
+                <h1><%= user.name %> Teacher</h1>
+            </div>
+        </div>
+
+        <!-- Modal Button -->
+						<div class="col-lg-12 text-center ">
+							<button class="btn btn-lg btn-warning rounded-0 text-white" href="#"
+								data-toggle="modal" data-target="#addCourse"><span>CREATE NEW
+									COURSE</span></button>
+						</div>
+
+                        <!-- ADD Modal -->
+			<div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-body customer-box">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Login">
+                            <form method="POST" action="/courses" class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="name" class="form-control"  placeholder="Course Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="hidden" name="role" class="form-control"  value="<%= user.role %>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea rows="8" name="description" class="form-control"
+                                        placeholder="Course Description" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <select class="form-control" name="category">
+                                            <% for (let i=0; i< categories.length; i++) { %>
+                                            <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+                                            <% } %>	
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+                                            Submit
+                                        </button>
+                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1"
+                                            data-dismiss="modal" aria-hidden="true">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <% for (let i=0; i< courses.length; i++) { %>
+                <div class="course-br">
+                    <div style="background: ghostwhite; 
+            font-size: 20px; 
+            padding: 10px; 
+            border: 1px solid lightgray; 
+            margin: 10px;">
+  <%= courses[i].name %>
+</div>
+                    <% } %>
+    
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <div class="widget clearfix">
+                            <div class="widget-title">
+                                <h3>About US</h3>
+                            </div>
+                            <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                            <div class="footer-right">
+                                <ul class="footer-links-soi">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-github"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul><!-- end links -->
+                            </div>
+                        </div><!-- end clearfix -->
+                    </div><!-- end col -->
+    
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <div class="widget clearfix">
+                            <div class="widget-title">
+                                <h3>Information Link</h3>
+                            </div>
+                            <ul class="footer-links">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul><!-- end links -->
+                        </div><!-- end clearfix -->
+                    </div><!-- end col -->
+                    
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <div class="widget clearfix">
+                            <div class="widget-title">
+                                <h3>Contact Details</h3>
+                            </div>
+    
+                            <ul class="footer-links">
+                                <li><a href="mailto:#">info@yoursite.com</a></li>
+                                <li><a href="#">www.yoursite.com</a></li>
+                                <li>PO Box 16122 Collins Street West Victoria 8007 Australia</li>
+                                <li>+61 3 8376 6284</li>
+                            </ul><!-- end links -->
+                        </div><!-- end clearfix -->
+                    </div><!-- end col -->
+                    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </footer><!-- end footer -->
+    
+        <div class="copyrights">
+            <div class="container">
+                <div class="footer-distributed">
+                    <div class="footer-center">                   
+                        <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">SmartEDU</a> Design By : <a href="https://html.design/">html design</a></p>
+                    </div>
+                </div>
+            </div><!-- end container -->
+        </div><!-- end copyrights -->
+    
+        <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+    
+        <!-- ALL JS FILES -->
+        <script src="/js/all.js"></script>
+        <!-- ALL PLUGINS -->
+        <script src="/js/custom.js"></script>
+    
+        <% } %>
 
 </body>
 </html>
