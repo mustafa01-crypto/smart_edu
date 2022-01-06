@@ -152,8 +152,14 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="teachers.html">Teachers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+					<% if(!userIN) { %> 
+						<li class="nav-item <%= page_name ==='login' && 'active' %> "><a class="nav-link" href="/login">Login</a></li>     
+					   <li class="nav-item <%= page_name ==='register' && 'active' %> "><a class="nav-link" href="/register">Register</a></li>
+					   <% } %>
+					   <% if(userIN) { %> 
+						<li class="nav-item  <%= page_name ==='dashboard' && 'active' %> "><a class="nav-link" href="/users/dashboard">Dashboard</a></li>
+						<li class="nav-item "><a class="nav-link" href="/users/logout">Sign Out</a></li>
+						<% } %>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="hover-btn-new log orange" href="#" data-toggle="modal" data-target="#login"><span>Book Now</span></a></li>
@@ -204,8 +210,9 @@
 							</div>
 						</div>
 						<div class="course-meta-bot">
-							<form method="post">
-								<button type="button" class="button">Enroll</button>
+							<form method="POST" action="/courses/enroll">
+								<input type="hidden" name="course_id" value="<%= course._id %>">
+								<button class="btn btn-lg btn-warning text-white"><span>ENROLL</span></button>
 							</form>
 						</div>
 					</div>

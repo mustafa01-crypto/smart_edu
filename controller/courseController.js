@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 const Category = require("../models/Category");
+const User = require('../models/User');
 
 exports.createCourse = async (req, res) => {
   try {
@@ -46,15 +47,32 @@ exports.getAllCourses = async (req, res) => {
 
 exports.getOneCourse = async (req, res) => {
   try {
-    const course = await Course.findOne({ slug: req.params.slug });
-    res.render("course", {
-      course,
+    const courses = await Course.findOne({ slug: req.params.slug });
+    const categories = await Category.find();
+    res.render("courses", {
+      courses,
       page_name: "courses",
+      categories
     });
   } catch (err) {
     res.status(400).json({
       status: "faill",
       err,
+    });
+  }
+};
+
+exports.enrollCourse = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userID);
+    await user.courses.push({_id:req.body.course_id});
+    await user.save();
+
+    res.status(200).redirect('/users/dashboard');
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
     });
   }
 };
