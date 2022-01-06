@@ -7,6 +7,7 @@ router.route('/').get(pageController.indexPage);
 router.route('/about').get(pageController.aboutPage);
 router.route('/register').get(redirectMiddlware,pageController.registerPage);
 router.route('/login').get(redirectMiddlware,pageController.loginPage);
-
+router.route('/contact').get(pageController.contactPage);
+router.route('/contact').post(pageController.sendMessage);
 
 module.exports = router;

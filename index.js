@@ -9,7 +9,8 @@ const pageRouter = require("./routes/pageRoutes");
 const courseRouter = require("./routes/courseRoutes");
 const categoryRoute = require("./routes/categoryRoute");
 const userRoute = require("./routes/userRoutes");
-const photoRoute = require('./routes/photoRoute')
+const photoRoute = require('./routes/photoRoute');
+const flash = require('connect-flash');
 
 //Conect to DB
 mongoose.connect("mongodb://localhost/smart-edu");
@@ -32,6 +33,11 @@ app.use(
     store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smart-edu' })
   })
 );
+app.use(flash());
+app.use((req, res, next)=> {
+  res.locals.flashMessages = req.flash();
+  next();
+})
 
 //Routes
 app.use('*', (req, res, next) => {
