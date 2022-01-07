@@ -4,7 +4,10 @@ const bodyParser = require("body-parser");
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const app = express();
+
 const fileUpload = require("express-fileupload");
+const multer  = require('multer')
+
 const pageRouter = require("./routes/pageRoutes");
 const courseRouter = require("./routes/courseRoutes");
 const categoryRoute = require("./routes/categoryRoute");

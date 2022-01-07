@@ -5,13 +5,30 @@ exports.createPhoto = async (req, res) => {
 
     let uploadeImage = req.files.image;
     let uploadPath =   'public/' + uploadeImage.name.trim();
-    const course = await Photo.create({
+    const photo = await Photo.create({
         ...req.body,
         photo: 'uploads/'+ uploadPath
     });
     res.status(201).json({
 
-        course
+        photo
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: "faill",
+      err,
+    });
+  }
+};
+
+exports.getAllPhotos = async (req, res) => {
+  try {
+
+    
+    const photos = await Photo.find();
+    res.status(200).json({
+
+        photos
     })
   } catch (err) {
     res.status(400).json({
